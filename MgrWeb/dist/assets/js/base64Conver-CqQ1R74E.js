@@ -1,0 +1,1 @@
+function e(e){return new Promise(((r,n)=>{const t=new FileReader;t.readAsDataURL(e),t.onload=()=>r(t.result),t.onerror=e=>n(e)}))}function r(e,r,n=null){var t=e.split(","),a=t[0].match(/:(.*?);/)[1],o=atob(t[1]);let l=o.length;for(var i=new Uint8Array(l);l--;)i[l]=o.charCodeAt(l);return new File([i],r,{type:n||a})}export{r as b,e as f};

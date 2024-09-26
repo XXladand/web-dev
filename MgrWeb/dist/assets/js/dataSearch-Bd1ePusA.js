@@ -1,0 +1,1 @@
+import{r as a}from"./request-Cv12-fnH.js";const t=t=>a({url:"/api/dataSearch/page",method:"post",data:t}),e=(t,e)=>a({url:"/api/dataSearch/GetRaw",method:"get",data:{id:t,type:e}});export{e as G,t as p};
