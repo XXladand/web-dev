@@ -87,7 +87,7 @@
   </div>
 </template>
 
-<template>
+<!--<template>
   <div class="modal" v-if="showModal">
     <div class="modal-content">
       <span class="close" @click="closeModal">&times;</span>
@@ -96,7 +96,7 @@
       <button @click="downloadFile(scope.row)">下载</button>
     </div>
   </div>
-</template>
+</template>-->
 
 <script lang="ts" setup="" name="dataSearch">
 import { ref } from "vue";
@@ -206,23 +206,23 @@ const handleCurrentChange = (val: number) => {
   handleQuery();
 };
 
-//打开弹窗
-const openModal = async (row: any) => {
-    this.showModal = true;
-}
-    //关闭弹窗
-const closeModal = async (row: any) => {
-    this.showModal = false;
-}
-//导出文件
-const downloadFile = async (row: any) => {
-      if (!this.fileName) {
-        alert('文件名不能为空');
-        return;
-      }
-      // 调用后端接口下载文件
-      this.ExportTaskAsync(row.id, 1,this.fileName);
-}
+////打开弹窗
+//const openModal = async (row: any) => {
+//    this.showModal = true;
+//}
+//    //关闭弹窗
+//const closeModal = async (row: any) => {
+//    this.showModal = false;
+//}
+////导出文件
+//const downloadFile = async (row: any) => {
+//      if (!this.fileName) {
+//        alert('文件名不能为空');
+//        return;
+//      }
+//      // 调用后端接口下载文件
+//      this.ExportTaskAsync(row.id, 1,this.fileName);
+//}
 handleQuery();
 </script>
 <style scoped>
