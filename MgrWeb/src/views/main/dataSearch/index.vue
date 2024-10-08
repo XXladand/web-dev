@@ -67,6 +67,7 @@
             </el-button>
             <el-button icon="ele-Delete" size="small" text="" type="primary" @click="viewRaw(scope.row)"> 查看原始
             </el-button>
+            <el-button  size="small" text="" type="primary" @click="openModal(scope.row)"> 导出文件</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -83,6 +84,17 @@
         {{ markdownContent }}
       </p>
     </el-dialog>
+  </div>
+</template>
+
+<template>
+  <div class="modal" v-if="showModal">
+    <div class="modal-content">
+      <span class="close" @click="closeModal">&times;</span>
+      <p>请输入文件名：</p>
+      <input type="text" v-model="fileName" placeholder="文件名">
+      <button @click="downloadFile(scope.row)">下载</button>
+    </div>
   </div>
 </template>
 
@@ -171,6 +183,23 @@ const viewRaw = async (row: any) => {
       loading.value = false;
     });
 }
+//打开弹窗
+openModal() {
+      this.showModal = true;
+    }
+//关闭弹窗
+closeModal() {
+      this.showModal = false;
+    }
+//导出文件
+downloadFile(scope.row) {
+      if (!this.fileName) {
+        alert('文件名不能为空');
+        return;
+      }
+      // 调用后端接口下载文件
+      this.ExportTaskAsync(row.id, 1,this.fileName);
+    }
 // 打开打印页面
 const openPrintDataSearch = async (row: any) => {
   printDataSearchTitle.value = '打印搜索引擎';
