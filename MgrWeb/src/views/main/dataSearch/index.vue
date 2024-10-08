@@ -183,23 +183,6 @@ const viewRaw = async (row: any) => {
       loading.value = false;
     });
 }
-//打开弹窗
-openModal() {
-      this.showModal = true;
-    }
-//关闭弹窗
-closeModal() {
-      this.showModal = false;
-    }
-//导出文件
-downloadFile(scope.row) {
-      if (!this.fileName) {
-        alert('文件名不能为空');
-        return;
-      }
-      // 调用后端接口下载文件
-      this.ExportTaskAsync(row.id, 1,this.fileName);
-    }
 // 打开打印页面
 const openPrintDataSearch = async (row: any) => {
   printDataSearchTitle.value = '打印搜索引擎';
@@ -222,7 +205,23 @@ const handleCurrentChange = (val: number) => {
   tableParams.value.page = val;
   handleQuery();
 };
-
+//打开弹窗
+const openModal() {
+      this.showModal = true;
+    }
+//关闭弹窗
+const closeModal() {
+      this.showModal = false;
+    }
+//导出文件
+const downloadFile(scope.row) {
+      if (!this.fileName) {
+        alert('文件名不能为空');
+        return;
+      }
+      // 调用后端接口下载文件
+      this.ExportTaskAsync(row.id, 1,this.fileName);
+    }
 handleQuery();
 </script>
 <style scoped>
