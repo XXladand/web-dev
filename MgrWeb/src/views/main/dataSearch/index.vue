@@ -205,23 +205,24 @@ const handleCurrentChange = (val: number) => {
   tableParams.value.page = val;
   handleQuery();
 };
+
 //打开弹窗
-const openModal() {
-      this.showModal = true;
-    }
-//关闭弹窗
-const closeModal() {
-      this.showModal = false;
-    }
+const openModal = async (row: any) => {
+    this.showModal = true;
+}
+    //关闭弹窗
+const closeModal = async (row: any) => {
+    this.showModal = false;
+}
 //导出文件
-const downloadFile(scope.row) {
+const downloadFile = async (row: any) => {
       if (!this.fileName) {
         alert('文件名不能为空');
         return;
       }
       // 调用后端接口下载文件
       this.ExportTaskAsync(row.id, 1,this.fileName);
-    }
+}
 handleQuery();
 </script>
 <style scoped>
