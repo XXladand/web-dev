@@ -67,7 +67,18 @@
             </el-button>
             <el-button icon="ele-Delete" size="small" text="" type="primary" @click="viewRaw(scope.row)"> 查看原始
             </el-button>
-            <el-button  size="small" text="" type="primary" @click="openModal(scope.row)"> 导出文件</el-button>
+            <el-button icon="ele-Delete" size="small" text="" type="primary" @click="openModal(scope.row)"> 导出文件
+            </el-button>
+            <template>
+                <div class="modal" v-if="showModal">
+                  <div class="modal-content">
+                    <span class="close" @click="closeModal(scope.row)">&times;</span>
+                    <p>请输入文件名：</p>
+                    <input type="text" v-model="fileName" placeholder="文件名">
+                    <button @click="downloadFile(scope.row)">下载</button>
+                  </div>
+                </div>
+            </template>
           </template>
         </el-table-column>
       </el-table>
@@ -87,16 +98,7 @@
   </div>
 </template>
 
-<!--<template>
-  <div class="modal" v-if="showModal">
-    <div class="modal-content">
-      <span class="close" @click="closeModal">&times;</span>
-      <p>请输入文件名：</p>
-      <input type="text" v-model="fileName" placeholder="文件名">
-      <button @click="downloadFile(scope.row)">下载</button>
-    </div>
-  </div>
-</template>-->
+
 
 <script lang="ts" setup="" name="dataSearch">
 import { ref } from "vue";
@@ -109,7 +111,7 @@ import { formatDate } from '/@/utils/formatTime';
 
 import printDialog from '/@/views/system/print/component/hiprint/preview.vue'
 import editDialog from '/@/views/main/dataSearch/component/editDialog.vue'
-import { pageDataSearch, GetRaw } from '/@/api/main/dataSearch';
+import { pageDataSearch, GetRaw,ExportTaskAsync } from '/@/api/main/dataSearch';
 import { getNetTaskNetTaskIdDropdown } from "/@/api/main/netTaskProcess";
 
 const showAdvanceQueryUI = ref(false);
@@ -205,24 +207,25 @@ const handleCurrentChange = (val: number) => {
   tableParams.value.page = val;
   handleQuery();
 };
-
-////打开弹窗
-//const openModal = async (row: any) => {
-//    this.showModal = true;
-//}
-//    //关闭弹窗
-//const closeModal = async (row: any) => {
-//    this.showModal = false;
-//}
-////导出文件
-//const downloadFile = async (row: any) => {
-//      if (!this.fileName) {
-//        alert('文件名不能为空');
-//        return;
-//      }
-//      // 调用后端接口下载文件
-//      this.ExportTaskAsync(row.id, 1,this.fileName);
-//}
+var showModal:boolean;
+var fileName:string;
+//打开弹窗
+const openModal = async (row: any) => {
+    showModal = true;
+}
+    //关闭弹窗
+const closeModal = async (row: any) => {
+    showModal = false;
+}
+//导出文件
+const downloadFile = async (row: any) => {
+      if (!fileName) {
+        alert('文件名不能为空');
+        return;
+      }
+      // 调用后端接口下载文件
+      ExportTaskAsync(row.id, 1,fileName);
+}
 handleQuery();
 </script>
 <style scoped>
