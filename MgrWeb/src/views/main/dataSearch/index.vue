@@ -75,6 +75,7 @@
                     <span class="close" @click="closeModal(scope.row)">&times;</span>
                     <p>请输入文件名：</p>
                     <input type="text" v-model="fileName" placeholder="文件名">
+                    <p>文件拓展名为txt或docx</p>
                     <button @click="downloadFile(scope.row)">下载</button>
                   </div>
                 </div>
@@ -207,15 +208,15 @@ const handleCurrentChange = (val: number) => {
   tableParams.value.page = val;
   handleQuery();
 };
-var showModal:boolean;
-var fileName:string;
+const showModal = ref(false);
+const fileName = ref('');
 //打开弹窗
 const openModal = async (row: any) => {
-    showModal = true;
+  showModal.value  = true;
 }
     //关闭弹窗
 const closeModal = async (row: any) => {
-    showModal = false;
+  showModal.value  = false;
 }
 //导出文件
 const downloadFile = async (row: any) => {
